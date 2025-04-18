@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIROS Şifre Yöneticisi</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <img src="assets/logo.svg" alt="VIROS Logo" class="logo">
+        <h1 id="title">Güvenli Şifre Oluşturucu</h1>
+      </div>
+      <div class="language-selector">
+        <select id="language-select">
+          <option value="tr">Türkçe</option>
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button id="generator-tab" class="tab-button active" data-tab="generator-section">
+        <span id="generator-tab-text">Şifre Oluşturucu</span>
+      </button>
+      <button id="saved-tab" class="tab-button" data-tab="saved-section">
+        <span id="saved-tab-text">Kayıtlı Şifreler</span>
+        <span id="password-count" class="badge">0</span>
+      </button>
+    </div>
+
+    <main>
+      <section id="generator-section" class="tab-content active">
+        <div class="password-display-container">
+          <input type="text" id="password-display" readonly>
+          <button id="copy-button" title="Şifreyi Kopyala">
+            <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <svg class="check-icon hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="strength-indicator">
+          <div class="strength-meter-container">
+            <div id="strength-meter" class="strength-meter"></div>
+          </div>
+          <div id="strength-text" class="strength-text">Orta</div>
+        </div>
+
+        <div class="options">
+          <div class="option-row">
+            <label id="length-label" for="length-slider">Uzunluk:</label>
+            <div class="length-control">
+              <input type="range" id="length-slider" min="8" max="32" value="16" step="1">
+              <span id="length-value">16 karakter</span>
+            </div>
+          </div>
+
+          <div class="option-row">
+            <label for="uppercase">
+              <input type="checkbox" id="uppercase" checked>
+              <span id="uppercase-label">Büyük harfler (A-Z)</span>
+            </label>
+          </div>
+
+          <div class="option-row">
+            <label for="lowercase">
+              <input type="checkbox" id="lowercase" checked>
+              <span id="lowercase-label">Küçük harfler (a-z)</span>
+            </label>
+          </div>
+
+          <div class="option-row">
+            <label for="numbers">
+              <input type="checkbox" id="numbers" checked>
+              <span id="numbers-label">Sayılar (0-9)</span>
+            </label>
+          </div>
+
+          <div class="option-row">
+            <label for="symbols">
+              <input type="checkbox" id="symbols" checked>
+              <span id="symbols-label">Semboller (!@#$...)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button id="generate-button" class="primary-button">
+            <span id="generate-button-text">Şifre Oluştur</span>
+          </button>
+          <button id="save-button" class="secondary-button">
+            <span id="save-button-text">Şifreyi Kaydet</span>
+          </button>
+        </div>
+
+        <div id="save-form" class="save-form hidden">
+          <label id="password-name-label" for="password-name">Şifre İçin İsim:</label>
+          <input type="text" id="password-name" placeholder="Örn: Gmail, Facebook, vb.">
+          <button id="confirm-save" class="primary-button">
+            <span id="confirm-save-text">Kaydet</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="saved-section" class="tab-content">
+        <div id="no-passwords" class="no-passwords">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <p id="no-passwords-text">Henüz kaydedilmiş şifre yok</p>
+          <button id="create-first-password" class="primary-button">
+            <span id="create-first-password-text">İlk Şifreyi Oluştur</span>
+          </button>
+        </div>
+
+        <div id="passwords-list" class="passwords-list"></div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <script src="languages.js"></script>
+  <script src="utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
